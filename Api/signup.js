@@ -9,9 +9,9 @@ route.post('/',async(req,res)=>{
 
     // res.send("Tarun Mali signup")
     // console.log(req.body)
-    const {name, email, phone, work, password, cpassword}=req.body;
+    const {name, email, phone, gender, password, cpassword,age}=req.body;
     // // console.log(name);
-    if (name==="" || email===""  || work==="" || password==="" || cpassword==="" || phone==="") {
+    if (name==="" || email===""  || phone==="" || gender==""|| password==="" || cpassword==="" || age==="") {
        return res.status(422).json({error:"Please fill all the fields"}); 
     }
 
@@ -27,9 +27,27 @@ route.post('/',async(req,res)=>{
 
     else{
         const user=User(req.body);
-        await user.save()
-        res.status(200).json({ message: "user registered successfuly" });
+        // await user.save()
+
+        user.save().then((result)=>{
+            //send json having name, email, phone as fields
+            var userObj = result.toObject();
+            delete userObj.password
+            delete userObj.cpassword
+            delete userObj.tokens
+            delete userObj.__v
+
+            res.status(201).json({user : userObj, guardian:[],soshistory:[]});
+            
+
+
+        }).catch((err)=>res.status(500).json({error:"Failed to register"}));
     }
+
+
+       
+        // res.status(200).json({ message: "user registered successfuly" });
+    
     })
 
 
