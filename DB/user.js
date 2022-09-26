@@ -45,13 +45,22 @@ const UserSchema= new mongoose.Schema({
         required: [true, 'Confirm Password is required'],
 
     },
+
+    guardians:{
+        type: Array,
+    },
+
+    guardiansof:{
+        type: Array,
+    },
+
     tokens: [{
         token:{
         type: String,
         required: [true, 'Token is required'],
     }}]
 
-},{ collection: 'two' })
+},{ collection: 'User' })
 
 
 

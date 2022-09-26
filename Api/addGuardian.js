@@ -2,7 +2,7 @@ const express=require('express');
 
 const User=require('../DB/user');
 const route=express.Router();
-const bcrypt=require('bcrypt');
+
 
 
 
@@ -12,8 +12,8 @@ const bcrypt=require('bcrypt');
         // res.send("Tarun Mali signin")
 
          let token;
-        const {email, password}=req.body;
-        if (email==="" || password==="") {
+        const {email}=req.body;
+        if (email==="") {
            return res.status(422).json({error:"Please fill all the fields"}); 
        }
 
@@ -24,31 +24,51 @@ const bcrypt=require('bcrypt');
             return res.status(422).json({error:"User does not exist"});
         }
         else{
-            // token= await userLogin.generateAuthToken();
 
-            // res.cookie('taruncookie',token,{
-            //     expires:new Date(Date.now()+25892000000),
-            //     httpOnly:true
-            // });
-            //30 days in milliseconds
-            //so that it works also on http, else it wil work only on https
 
-            const isMatch=await bcrypt.compare(password,userLogin.password);
-            if(!isMatch){
-                return res.status(422).json({error:"Password is incorrect"});
-            }
-            else{
                 var userObj = userLogin.toObject();
                 delete userObj.password
                 delete userObj.cpassword
                 delete userObj.tokens
                 delete userObj.__v
+                delete userObj.guardians
+                delete userObj.guardiansof
     
-                res.status(201).json(userObj);
+                
+
+                //already logedin ki id needed
+
+
+
+
+                let idOfGuardian = userObj._id;
+                let test="632f1932c4fb67a1f090e3c1"
+
+//Updating the list of the guardians of the present user
+
+
+                User.updateOne(
+                    { _id: test },
+                    { $push: { guardians: idOfGuardian } }
+                ).then((result)=>{
+                    
+                    res.status(201).json(result);
+                    // res.status(201).json(userObj);
+                    
+        
+        
+                }).catch((err)=>res.status(500).json({error:"Failed to register"}));
+
+//Updating the list of "guardiansof"
+
+
+
+
+
 
 
                 // res.json(userLogin);
-            }
+
 
         }
 

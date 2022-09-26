@@ -28,8 +28,8 @@ const middleware=(req,res, next )=>{
 
 
 app.use('/Api/signup', require('./Api/signup'));
-// app.use('/Api/signin', require('./Api/signin'));
-
+app.use('/Api/signin', require('./Api/signin'));
+app.use('/Api/addGuardian', require('./Api/addGuardian'));
 
 
 connectDB();
@@ -50,4 +50,9 @@ app.listen(Port, () => {
 app.get('/signup', (req, res) => {
     res.send("signup");
 });
+
+app.get('/addGuardian', (req, res) => {
+    res.send("Add Guardian");
+});
+
 
