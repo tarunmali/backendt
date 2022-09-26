@@ -37,7 +37,7 @@ route.post('/',async(req,res)=>{
             delete userObj.tokens
             delete userObj.__v
 
-            res.status(201).json({user : userObj, guardian:[],soshistory:[]});
+            res.status(201).json(userObj);
             
 
 

@@ -42,7 +42,7 @@ const route=express.Router();
 
 
                 let idOfGuardian = userObj._id;
-                let test="632f1932c4fb67a1f090e3c1"
+                let test="6331288eeef1d9164ea90570"
 
 //Updating the list of the guardians of the present user
 
@@ -52,7 +52,7 @@ const route=express.Router();
                     { $push: { guardians: idOfGuardian } }
                 ).then((result)=>{
                     
-                    res.status(201).json(result);
+                    // res.status(201).json(result);
                     // res.status(201).json(userObj);
                     
         
@@ -61,6 +61,17 @@ const route=express.Router();
 
 //Updating the list of "guardiansof"
 
+            User.updateOne(
+                { _id: idOfGuardian },
+                { $push: { guardiansof: test } }
+            ).then((result)=>{
+                
+                res.status(201).json(result);
+                // res.status(201).json(userObj);
+                
+
+
+            }).catch((err)=>res.status(500).json({error:"Failed to register"}));
 
 
 
