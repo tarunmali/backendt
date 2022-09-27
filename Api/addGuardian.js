@@ -28,7 +28,7 @@ const route=express.Router();
 
                 var userObj = userLogin.toObject();
                 delete userObj.password
-                delete userObj.cpassword
+                delete userObj.confirmpassword
                 delete userObj.tokens
                 delete userObj.__v
                 delete userObj.guardians

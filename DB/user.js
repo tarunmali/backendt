@@ -40,10 +40,16 @@ const UserSchema= new mongoose.Schema({
         required: [true, 'Password is required'],
 
     },
-    cpassword: {
+    confirmpassword: {
         type: String,
         required: [true, 'Confirm Password is required'],
 
+    },
+
+
+    address: {
+        type: String,
+        required: [true, 'Address is required'],
     },
 
     guardians:{
@@ -88,7 +94,7 @@ UserSchema.methods.generateAuthToken= async function(){
 UserSchema.pre('save',async function(next){
     if(this.isModified('password')) {
         this.password=await bcrypt.hash(this.password,12);
-        this.cpassword=await bcrypt.hash(this.cpassword,12);
+        this.confirmpassword=await bcrypt.hash(this.confirmpassword,12);
     }
     next();
 

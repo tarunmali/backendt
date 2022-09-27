@@ -9,9 +9,9 @@ route.post('/',async(req,res)=>{
 
     // res.send("Tarun Mali signup")
     // console.log(req.body)
-    const {name, email, phone, gender, password, cpassword,age}=req.body;
+    const {name, email, phone, gender, password, confirmpassword,age,address}=req.body;
     // // console.log(name);
-    if (name==="" || email===""  || phone==="" || gender==""|| password==="" || cpassword==="" || age==="") {
+    if (name==="" || email===""  || phone==="" || gender==""|| password==="" || confirmpassword==="" || age==="" || address==="") {
        return res.status(422).json({error:"Please fill all the fields"}); 
     }
 
@@ -21,7 +21,7 @@ route.post('/',async(req,res)=>{
         return res.status(422).json({error:"User already exist"});
     }
 
-    else if(password!=cpassword){
+    else if(password!=confirmpassword){
         return res.status(422).json({error:"Password doesn't match"});
     }
 
@@ -33,7 +33,7 @@ route.post('/',async(req,res)=>{
             //send json having name, email, phone as fields
             var userObj = result.toObject();
             delete userObj.password
-            delete userObj.cpassword
+            delete userObj.confirmpassword
             delete userObj.tokens
             delete userObj.__v
 
