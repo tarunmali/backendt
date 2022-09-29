@@ -24,7 +24,14 @@ const route=express.Router();
          var guardianArray = userLogin.guardians;
             var guardianArrayObj = [];
             for (var i = 0; i < guardianArray.length; i++) {
-                var guardianObj = await User.findOne({_id:guardianArray[i]});
+                var guardianResult = await User.findOne({_id:guardianArray[i]});
+                var guardianObj = guardianResult.toObject();
+                delete guardianObj.password
+                delete guardianObj.confirmpassword
+                delete guardianObj.tokens
+                delete guardianObj.__v
+                delete guardianObj.guardians
+                delete guardianObj.guardiansof
                 guardianArrayObj.push(guardianObj);
             }
     //    userLogin.guardiansof.forEach((guardian)=>{
