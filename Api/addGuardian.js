@@ -12,7 +12,7 @@ const route=express.Router();
         // res.send("Tarun Mali signin")
 
          let token;
-        const {email}=req.body;
+        const {email,test}=req.body;
         if (email==="") {
            return res.status(422).json({error:"Please fill all the fields"}); 
        }
@@ -21,7 +21,7 @@ const route=express.Router();
 
 
         if(!userLogin){
-            return res.status(422).json({error:"User does not exist"});
+            return res.status(422).json({error:"Guardian does not exist"});
         }
         else{
 
@@ -42,7 +42,7 @@ const route=express.Router();
 
 
                 let idOfGuardian = userObj._id;
-                let test="6331288eeef1d9164ea90570"
+                // let test="6331288eeef1d9164ea90570"
 
 //Updating the list of the guardians of the present user
 

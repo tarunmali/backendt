@@ -36,6 +36,8 @@ route.post('/',async(req,res)=>{
             delete userObj.confirmpassword
             delete userObj.tokens
             delete userObj.__v
+            delete userObj.guardians
+            delete userObj.guardiansof
 
             res.status(201).json(userObj);
             
