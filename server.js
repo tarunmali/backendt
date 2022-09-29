@@ -1,7 +1,7 @@
 const express=require('express');
 const app=express();
 var cors = require('cors')
-const mongoose= require('mongoose');
+// const mongoose= require('mongoose');
 const connectDB=require('./DB/connection');
 
 
@@ -30,6 +30,7 @@ const middleware=(req,res, next )=>{
 app.use('/Api/signup', require('./Api/signup'));
 app.use('/Api/signin', require('./Api/signin'));
 app.use('/Api/addGuardian', require('./Api/addGuardian'));
+app.use('/Api/viewGuardian', require('./Api/viewGuardian'));
 
 
 connectDB();
@@ -54,5 +55,10 @@ app.get('/signup', (req, res) => {
 app.get('/addGuardian', (req, res) => {
     res.send("Add Guardian");
 });
+
+app.get('/viewGuardian', (req, res) => {
+    res.send("View Guardian");
+});
+
 
 
