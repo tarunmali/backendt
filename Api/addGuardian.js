@@ -24,20 +24,24 @@ const route=express.Router();
             return res.status(422).json({error:"Guardian does not exist"});
         }
         else{
-            //logic for guardian already exists
-
-
-                var userObj = userLogin.toObject();
+                
                     
-//                 //already logedin ki id needed
+                //see if userId already exist in guardians array or not
+                var userObj = userLogin.toObject();
 
 
 
 
-//                 let idOfGuardian = userObj._id;
-//                 // let test="6331288eeef1d9164ea90570"
 
-// //Updating the list of the guardians of the present user
+                var guardianArray = userObj.guardians;
+                for (var i = 0; i < guardianArray.length; i++) 
+                    if(guardianArray[i]===userLogin._id){
+                    {
+                        return res.status(422).json({error:"Guardian already exist"});
+                    }
+                }
+            
+                
 
 
                 User.updateOne(
@@ -69,7 +73,7 @@ const route=express.Router();
                 // res.json(userLogin);
 
 
-        }
+    }
 
 
 
