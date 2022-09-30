@@ -3,19 +3,15 @@ const User=require('../DB/user');
 const route=express.Router();
 
 
-
-// This is important 
 route.post('/',async(req,res)=>{
 
-    // res.send("Tarun Mali signup")
-    // console.log(req.body)
+
     const {name, email, phone, gender, password, confirmpassword,age,address}=req.body;
-    // // console.log(name);
     if (name==="" || email===""  || phone==="" || gender==""|| password==="" || confirmpassword==="" || age==="" || address==="") {
        return res.status(422).json({error:"Please fill all the fields"}); 
     }
 
-    const userLogin= await User.findOne({email:email});
+    const userLogin= await User.findOne({phone:phone});
 
     if(userLogin){
         return res.status(422).json({error:"User already exist"});
@@ -27,37 +23,18 @@ route.post('/',async(req,res)=>{
 
     else{
         const user=User(req.body);
-        // await user.save()
 
         user.save().then((result)=>{
-            //send json having name, email, phone as fields
-            var userObj = result.toObject();
-            delete userObj.password
-            delete userObj.confirmpassword
-            delete userObj.tokens
-            delete userObj.__v
-            delete userObj.guardians
-            delete userObj.guardiansof
+            var userObj={
+                _id: result._id.toString(),
+                name: result.name,
+                phone: result.phone,
 
+            }
             res.status(201).json(userObj);
-            
-
-
         }).catch((err)=>res.status(500).json({error:"Failed to register"}));
     }
-
-
-       
-        // res.status(200).json({ message: "user registered successfuly" });
-    
     })
-
-
-    // console.log(user);
-    
-    // // res.json(user)
-    // console.log(user)
-
 
 
 module.exports=route;
