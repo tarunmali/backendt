@@ -11,42 +11,38 @@ const route=express.Router();
 
         // res.send("Tarun Mali signin")
 
-         let token;
         const {phone,userId}=req.body;
         if (phone==="") {
            return res.status(422).json({error:"Please fill all the fields"}); 
        }
 
-       const userLogin= await User.findOne({phone:phone});
+       
+       const guardianLogin= await User.findOne({phone:phone});
+       //guardianLogin contains the details of the guardian we want to add
 
 
-        if(!userLogin){
+        if(!guardianLogin){
             return res.status(422).json({error:"Guardian does not exist"});
         }
         else{
-                
-                    
-                //see if userId already exist in guardians array or not
-                var userObj = userLogin.toObject();
+            const userLogin= await User.findOne({_id:userId}); 
+            //finding guardian array of the loggen in user
+    
+            guardianArray=userLogin.guardians;
 
-
-
-
-
-                var guardianArray = userObj.guardians;
-                for (var i = 0; i < guardianArray.length; i++) 
-                    if(guardianArray[i]===userLogin._id){
-                    {
-                        return res.status(422).json({error:"Guardian already exist"});
-                    }
+            for (var i = 0; i < guardianArray.length; i++) 
+                // console.log(guardianArray[i])
+                // console.log(guardianLogin._id.toString())
+                // console.log(userId)
+                if(guardianArray[i]===guardianLogin._id.toString()){
+                {
+                    return res.status(422).json({error:"Guardian already exist"});
+                }
                 }
             
-                
-
-
                 User.updateOne(
                     { _id: userId },
-                    { $push: { guardians: userObj._id } }
+                    { $push: { guardians: guardianLogin._id.toString() } }
                 ).then((result)=>{
 
                 }).catch((err)=>res.status(500).json({error:"Failed to register"}));
@@ -54,7 +50,7 @@ const route=express.Router();
 //Updating the list of "guardiansof"
 
             User.updateOne(
-                { _id: userObj._id },
+                { _id: guardianLogin._id.toString()},
                 { $push: { guardiansof: userId } }
             ).then((result)=>{
                 

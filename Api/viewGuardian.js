@@ -19,6 +19,13 @@ route.get("/:id", async (req, res) => {
              delete guardianObj.__v
              delete guardianObj.guardians
              delete guardianObj.guardiansof
+            //  delete guardianObj.phone
+             delete guardianObj.email
+            //  delete guardianObj._id
+            delete guardianObj.gender
+            delete guardianObj.age
+            delete guardianObj.address
+             
              guardianArrayObj.push(guardianObj);
          }
 
