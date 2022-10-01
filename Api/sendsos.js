@@ -11,7 +11,7 @@ route.post("/:id",async(req,res)=>{
 
     var guardianArray = userLogin.guardians;
     // var messageArrayObj = [];
-    console.log(userLogin);
+    // console.log(userLogin);
 
 
     for (var i = 0; i < guardianArray.length; i++) {
