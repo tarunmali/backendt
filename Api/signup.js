@@ -2,10 +2,7 @@ const express=require('express');
 const User=require('../DB/user');
 const route=express.Router();
 
-
 route.post('/',async(req,res)=>{
-
-
     const {name, email, phone, gender, password, confirmpassword,age,address}=req.body;
     if (name==="" || email===""  || phone==="" || gender==""|| password==="" || confirmpassword==="" || age==="" || address==="") {
        return res.status(422).json({error:"Please fill all the fields"}); 
@@ -14,7 +11,7 @@ route.post('/',async(req,res)=>{
     const userLogin= await User.findOne({phone:phone});
 
     if(userLogin){
-        return res.status(422).json({error:"User already exist"});
+        return res.status(422).json({error:"Mobile number already registered"});
     }
 
     else if(password!=confirmpassword){
@@ -23,11 +20,7 @@ route.post('/',async(req,res)=>{
 
     else{
         const user=User(req.body);
-
-
         user.save().then((result)=>{
-
-
             var userObj={
                 _id: result._id.toString(),
                 name: result.name,

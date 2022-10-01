@@ -1,10 +1,7 @@
 const express=require('express');
-
 const User=require('../DB/user');
 const route=express.Router();
 const bcrypt=require('bcrypt');
-
-
 
      route.post('/',async(req,res)=>{
         const {phone, password}=req.body;
