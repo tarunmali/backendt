@@ -5,6 +5,8 @@ const bcrypt=require('bcrypt');
 
      route.post('/',async(req,res)=>{
         const {phone, password}=req.body;
+
+
         if (phone==="" || password==="") {
            return res.status(422).json({error:"Please fill all the fields"}); 
        }
@@ -26,6 +28,7 @@ const bcrypt=require('bcrypt');
                     name: userLogin.name,
                     email: userLogin.email,
                     phone: userLogin.phone,
+                    customText: userLogin.customText
                 } 
                 res.status(201).json(userObj);
             }

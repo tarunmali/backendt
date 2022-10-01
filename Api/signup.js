@@ -25,6 +25,7 @@ route.post('/',async(req,res)=>{
                 _id: result._id.toString(),
                 name: result.name,
                 phone: result.phone,
+                customText: result.customText
             }
             res.status(201).json(userObj);
         }).catch((err)=>res.status(500).json({error:"Failed to register, Try again"}));
