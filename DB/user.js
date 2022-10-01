@@ -1,5 +1,5 @@
 const mongoose= require('mongoose');
-const jwt=require('jsonwebtoken');
+// const jwt=require('jsonwebtoken');
 const bcrypt=require('bcrypt');
 
 const UserSchema= new mongoose.Schema({
@@ -79,19 +79,19 @@ const UserSchema= new mongoose.Schema({
 
 
 
-UserSchema.methods.generateAuthToken= async function(){
-    try{
-        let tokenTarun=jwt.sign({_id:this._id},process.env.SECRET_KEY);
-        this.tokens=this.tokens.concat({token:tokenTarun});
-        await this.save();
-        return tokenTarun;
-        //payload, secretKey, 
+// UserSchema.methods.generateAuthToken= async function(){
+//     try{
+//         let tokenTarun=jwt.sign({_id:this._id},process.env.SECRET_KEY);
+//         this.tokens=this.tokens.concat({token:tokenTarun});
+//         await this.save();
+//         return tokenTarun;
+//         //payload, secretKey, 
 
-    }catch(err){
-        console.log(err);
-    }
+//     }catch(err){
+//         console.log(err);
+//     }
 
-    }
+//     }
 
 
 
