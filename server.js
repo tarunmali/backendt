@@ -31,7 +31,7 @@ app.use('/Api/signup', require('./Api/signup'));
 app.use('/Api/signin', require('./Api/signin'));
 app.use('/Api/addGuardian', require('./Api/addGuardian'));
 app.use('/Api/viewGuardian', require('./Api/viewGuardian'));
-
+app.use('/Api/editcustomtext', require('./Api/editcustomtext'));
 
 connectDB();
 const Port= process.env.PORT || 3001;
@@ -58,6 +58,10 @@ app.get('/addGuardian', (req, res) => {
 
 app.get('/viewGuardian', (req, res) => {
     res.send("View Guardian");
+});
+
+app.get('/editcustomtext', (req, res) => {
+    res.send("Edit custom text");
 });
 
 

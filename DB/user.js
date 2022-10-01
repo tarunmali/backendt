@@ -52,6 +52,15 @@ const UserSchema= new mongoose.Schema({
         required: [true, 'Address is required'],
     },
 
+
+
+    customText: {
+        type: String,
+        default: "I am in an emergency. Please help me."
+        //set its default value
+
+    },
+
     guardians:{
         type: Array,
     },

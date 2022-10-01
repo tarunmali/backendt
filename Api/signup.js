@@ -27,12 +27,11 @@ route.post('/',async(req,res)=>{
         user.save().then((result)=>{
             var userObj={
                 _id: result._id.toString(),
-                name: result.name,
-                phone: result.phone,
-
+                name: name,
+                phone: phone,
             }
             res.status(201).json(userObj);
-        }).catch((err)=>res.status(500).json({error:"Failed to register"}));
+        }).catch((err)=>res.status(500).json({error:"Failed to register, Try again"}));
     }
     })
 
