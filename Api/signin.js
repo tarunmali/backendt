@@ -28,7 +28,7 @@ const bcrypt=require('bcrypt');
                     _id: userLogin._id.toString(),
                     name: userLogin.name,
                     email: userLogin.email,
-                    phone: phone,
+                    phone: userLogin.phone,
                 } 
                 res.status(201).json(userObj);
             }

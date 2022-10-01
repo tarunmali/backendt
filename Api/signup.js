@@ -24,11 +24,14 @@ route.post('/',async(req,res)=>{
     else{
         const user=User(req.body);
 
+
         user.save().then((result)=>{
+
+
             var userObj={
                 _id: result._id.toString(),
-                name: name,
-                phone: phone,
+                name: result.name,
+                phone: result.phone,
             }
             res.status(201).json(userObj);
         }).catch((err)=>res.status(500).json({error:"Failed to register, Try again"}));
