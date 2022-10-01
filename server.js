@@ -34,6 +34,7 @@ app.use('/Api/addGuardian', require('./Api/addGuardian'));
 app.use('/Api/viewGuardian', require('./Api/viewGuardian'));
 app.use('/Api/editcustomtext', require('./Api/editcustomtext'));
 app.use('/Api/sendsos', require('./Api/sendsos'));
+app.use('/Api/soshistory', require('./Api/soshistory'));
 
 connectDB();
 const Port= process.env.PORT || 3001;
@@ -70,6 +71,9 @@ app.get('/sendsos', (req, res) => {
     res.send("Send sos message");
 });
 
+app.get('/soshistory', (req, res) => {
+    res.send("View sos history");
+});
 
 
 

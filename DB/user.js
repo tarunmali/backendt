@@ -69,6 +69,11 @@ const UserSchema= new mongoose.Schema({
         type: Array,
     },
 
+
+    sosHistory:{
+        type: Array,    
+    },
+
     tokens: [{
         token:{
         type: String,
