@@ -7,11 +7,11 @@ const route=express.Router();
 
 
     //login route
-     route.post('/',async(req,res)=>{
+     route.post("/:id",async(req,res)=>{
 
         // res.send("Tarun Mali signin")
-
-        const {phone,userId}=req.body;
+        const userId = req.params.id;
+        const {phone}=req.body;
         if (phone==="") {
            return res.status(422).json({error:"Please fill all the fields"}); 
        }
